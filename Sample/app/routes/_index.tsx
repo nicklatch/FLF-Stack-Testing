@@ -8,6 +8,8 @@ import {
   CardHeader,
   CardTitle,
 } from '~/components/ui/card';
+import { Form } from '@remix-run/react';
+import { Input } from '~/components/ui/input';
 
 type CardProps = React.ComponentProps<typeof Card>;
 
@@ -17,14 +19,19 @@ export const meta: V2_MetaFunction = () => {
 
 export default function Index({ className, ...props }: CardProps) {
   return (
-    <Card className='flex flex-col items-center p-1 text-center gap-2'>
+    <Card className="flex flex-col items-center p-1 text-center gap-2">
       <CardHeader>
         <CardTitle>Login</CardTitle>
         <CardDescription>Login to your FastLane Fusion Account</CardDescription>
       </CardHeader>
-      <CardContent></CardContent>
-      <CardFooter>
-      </CardFooter>
+      <CardContent>
+        <Form method="post" className='flex flex-col'>
+          <Input type="email" placeholder="email" />
+          <Input type="password" placeholder="password" />
+          <Button type="submit">Login</Button>
+        </Form>
+      </CardContent>
+      <CardFooter></CardFooter>
     </Card>
   );
 }
