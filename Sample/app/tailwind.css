@@ -85,3 +85,7 @@
     @apply bg-background text-foreground;
   }
 }
+
+.error-container {
+  @apply bg-destructive rounded-md text-destructive-foreground text-center;
+}
