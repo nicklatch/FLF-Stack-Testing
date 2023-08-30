@@ -17,11 +17,7 @@ import {
   validateUrl,
 } from '~/lib/validators';
 import { badRequest } from 'utils/request.server';
-import { creatUserSession, login } from '~/models/user.server';
-
-type CardProps = React.ComponentProps<typeof Card>;
-type ButtonProps = React.ComponentProps<typeof Button>;
-type InputProps = React.ComponentProps<typeof Input>;
+import { createUserSession, login } from '~/models/user.server';
 
 export const meta: V2_MetaFunction = () => {
   const description = 'Login to your FastLane Fusion Account';
@@ -73,40 +69,37 @@ export const action = async ({ request }: ActionArgs) => {
       formError: 'Invalid username and/or password',
     });
   }
-  return creatUserSession(user.id, redirectTo);
+  return createUserSession(user.id, redirectTo);
 };
 
-export default function Login({
-  className,
-  ...props
-}: CardProps | ButtonProps | InputProps) {
+export default function Login() {
   const actionData = useActionData<typeof action>();
   const [searchParams] = useSearchParams();
 
   return (
-    <Card className='max-w-lg mx-auto'>
-      <CardHeader className='text-center'>
+    <Card className="max-w-lg mx-auto">
+      <CardHeader className="text-center">
         <CardTitle>Login</CardTitle>
         <CardDescription>Login to your FastLane Fusion Account</CardDescription>
       </CardHeader>
       <CardContent>
-        <Form method='post'>
+        <Form method="post">
           <Input
-            type='hidden'
-            name='redirectTo'
+            type="hidden"
+            name="redirectTo"
             value={searchParams.get('redirectTo') ?? undefined}
           />
 
-          <Label htmlFor='username-input'>
+          <Label htmlFor="username-input">
             Username:
             <Input
-              type='text'
-              name='username'
-              id='username-input'
-              placeholder='username'
+              type="text"
+              name="username"
+              id="username-input"
+              placeholder="username"
               required
-              min='4'
-              max='127'
+              min="4"
+              max="127"
               defaultValue={actionData?.fields?.username}
               aria-invalid={Boolean(actionData?.fieldErrors?.username)}
               aria-errormessage={
@@ -115,16 +108,16 @@ export default function Login({
             />
           </Label>
 
-          <Label htmlFor='password-input'>
+          <Label htmlFor="password-input">
             Password:
             <Input
-              type='password'
-              name='password'
-              id='password-input'
-              placeholder='password'
+              type="password"
+              name="password"
+              id="password-input"
+              placeholder="password"
               required
-              min='6'
-              max='127'
+              min="6"
+              max="127"
               defaultValue={actionData?.fields?.password}
               aria-invalid={Boolean(actionData?.fieldErrors?.password)}
               aria-errormessage={
@@ -132,13 +125,13 @@ export default function Login({
               }
             />
           </Label>
-          <div className='flex justify-center pt-6'>
-            <Button type='submit'>Login</Button>
+          <div className="flex justify-center pt-6">
+            <Button type="submit">Login</Button>
           </div>
         </Form>
       </CardContent>
       <CardFooter>
-        <Link to='.' className='mx-auto'>
+        <Link to="." className="mx-auto">
           Forgot Password?
         </Link>
       </CardFooter>
