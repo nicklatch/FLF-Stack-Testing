@@ -1,8 +1,7 @@
 export default function FusionIndexRoute() {
   return (
-    <div>
+    <div className=''>
       <header>This is the Fusion Index Route</header>
-      
     </div>
   );
 }

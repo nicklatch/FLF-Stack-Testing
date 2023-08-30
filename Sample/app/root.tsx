@@ -33,16 +33,26 @@ function Document({
   title = 'FastLane Fusion',
 }: PropsWithChildren<{ title?: string }>) {
   return (
-    <html lang='en' className='min-h-screen'>
+    <html lang='en'>
       <head>
         <meta charSet='utf-8' />
         <meta name='viewport' content='width=device-width, initial-scale=1' />
         <meta name='keywords' content='Remix,racing' />
         <Meta />
         {title ? <title>{title}</title> : null}
+        <link rel='preconnect' href='https://fonts.googleapis.com' />
+        <link
+          rel='preconnect'
+          href='https://fonts.gstatic.com'
+          crossOrigin='true'
+        />
+        <link
+          href='https://fonts.googleapis.com/css2?family=Inter:wght@400;500;700&display=swap'
+          rel='stylesheet'
+        />
         <Links />
       </head>
-      <body className='grid place-items-center min-h-screen max-w-screen'>
+      <body className='min-h-[100svh] sm:min-h-screen grid grid-rows-[auto_1fr] max-w-7xl pb-4 px-4 mx-auto'>
         {children}
         <Scripts />
         <LiveReload />

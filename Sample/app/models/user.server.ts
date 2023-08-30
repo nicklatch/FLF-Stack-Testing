@@ -61,7 +61,7 @@ export async function verifyUser(request: Request) {
   return getUser(request);
 }
 
-export async function getUserId(request: Request): Promise<string | null> {
+export async function getUserId(request: Request) {
   const session = await getUserSession(request);
   const userId = session.get('userId');
 
@@ -98,6 +98,7 @@ export async function logout(request: Request) {
 
 export async function getUser(request: Request) {
   const userId = await getUserId(request);
+
   if (typeof userId !== 'string') {
     return null;
   }
