@@ -16,7 +16,7 @@ import {
   validateUsername,
   validateUrl,
 } from '~/lib/validators';
-import { badRequest } from 'utils/request.server';
+import { badRequest } from '~/models/request.server';
 import { createUserSession, login } from '~/models/user.server';
 
 export const meta: V2_MetaFunction = () => {
@@ -77,64 +77,72 @@ export default function Login() {
   const [searchParams] = useSearchParams();
 
   return (
-    <Card className='max-w-lg place-self-center'>
-      <CardHeader className='text-center'>
-        <CardTitle>Login</CardTitle>
-        <CardDescription>Login to your FastLane Fusion Account</CardDescription>
-      </CardHeader>
-      <CardContent>
-        <Form method='post'>
-          <Input
-            type='hidden'
-            name='redirectTo'
-            value={searchParams.get('redirectTo') ?? undefined}
-          />
-
-          <Label htmlFor='username-input'>
-            Username:
+    <div className='flex justify-center items-center col-span-full row-span-full'>
+      <Card className='bg-secondary'>
+        <CardHeader className=''>
+          <CardTitle>Login</CardTitle>
+          <CardDescription>
+            Login to your FastLane Fusion Account
+          </CardDescription>
+        </CardHeader>
+        <CardContent>
+          <Form method='post'>
             <Input
-              type='text'
-              name='username'
-              id='username-input'
-              placeholder='username'
-              required
-              min='4'
-              max='127'
-              defaultValue={actionData?.fields?.username}
-              aria-invalid={Boolean(actionData?.fieldErrors?.username)}
-              aria-errormessage={
-                actionData?.fieldErrors?.username ? 'username-error' : undefined
-              }
+              type='hidden'
+              name='redirectTo'
+              value={searchParams.get('redirectTo') ?? undefined}
             />
-          </Label>
-
-          <Label htmlFor='password-input'>
-            Password:
-            <Input
-              type='password'
-              name='password'
-              id='password-input'
-              placeholder='password'
-              required
-              min='6'
-              max='4'
-              defaultValue={actionData?.fields?.password}
-              aria-invalid={Boolean(actionData?.fieldErrors?.password)}
-              aria-errormessage={
-                actionData?.fieldErrors?.password ? 'password-error' : undefined
-              }
-            />
-          </Label>
-          <div className='flex justify-center pt-6'>
-            <Button type='submit'>Login</Button>
-          </div>
-        </Form>
-      </CardContent>
-      <CardFooter>
-        <Link to='.' className='mx-auto'>
-          Forgot Password?
-        </Link>
-      </CardFooter>
-    </Card>
+            <Label htmlFor='username-input'>
+              Username:
+              <Input
+                type='text'
+                name='username'
+                id='username-input'
+                placeholder='username'
+                required
+                min='4'
+                max='127'
+                defaultValue={actionData?.fields?.username}
+                aria-invalid={Boolean(actionData?.fieldErrors?.username)}
+                aria-errormessage={
+                  actionData?.fieldErrors?.username
+                    ? 'username-error'
+                    : undefined
+                }
+              />
+            </Label>
+            <Label htmlFor='password-input'>
+              Password:
+              <Input
+                type='password'
+                name='password'
+                id='password-input'
+                placeholder='password'
+                required
+                min='6'
+                max='4'
+                defaultValue={actionData?.fields?.password}
+                aria-invalid={Boolean(actionData?.fieldErrors?.password)}
+                aria-errormessage={
+                  actionData?.fieldErrors?.password
+                    ? 'password-error'
+                    : undefined
+                }
+              />
+            </Label>
+            <div className='flex justify-center pt-6'>
+              <Button type='submit' className='w-full'>
+                Login
+              </Button>
+            </div>
+          </Form>
+          <CardFooter>
+            <Link to='.' className='mx-auto'>
+              Forgot Password?
+            </Link>
+          </CardFooter>
+        </CardContent>
+      </Card>
+    </div>
   );
 }

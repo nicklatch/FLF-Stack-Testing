@@ -1,5 +1,6 @@
 import type { LinksFunction, V2_MetaFunction } from '@remix-run/node';
 import type { PropsWithChildren } from 'react';
+import { useMediaQuery } from '@uidotdev/usehooks';
 import {
   Links,
   isRouteErrorResponse,
@@ -12,6 +13,10 @@ import {
 } from '@remix-run/react';
 import { cssBundleHref } from '@remix-run/css-bundle';
 import styles from './tailwind.css';
+import Providers from './components/providers';
+import { atom, useAtomValue } from 'jotai';
+
+export const theme = atom('dark');
 
 export const links: LinksFunction = () => [
   { rel: 'stylesheet', href: styles },
@@ -32,8 +37,12 @@ function Document({
   children,
   title = 'FastLane Fusion',
 }: PropsWithChildren<{ title?: string }>) {
+  const appTheme = useAtomValue(theme);
+
+  console.log(appTheme);
+
   return (
-    <html lang='en'>
+    <html lang='en' className={appTheme}>
       <head>
         <meta charSet='utf-8' />
         <meta name='viewport' content='width=device-width, initial-scale=1' />
@@ -44,6 +53,7 @@ function Document({
         <link
           rel='preconnect'
           href='https://fonts.gstatic.com'
+          //@ts-ignore
           crossOrigin='true'
         />
         <link
@@ -52,7 +62,7 @@ function Document({
         />
         <Links />
       </head>
-      <body className='min-h-[100svh] sm:min-h-screen grid grid-rows-[auto_1fr] max-w-7xl pb-4 px-4 mx-auto'>
+      <body className='min-h-[100svh] sm:min-h-screen grid grid-rows-[auto_1fr] max-w-7xl px-2 mx-auto'>
         {children}
         <Scripts />
         <LiveReload />
@@ -63,10 +73,12 @@ function Document({
 
 export default function App() {
   return (
-    <Document>
-      <Outlet />
-      <ScrollRestoration />
-    </Document>
+    <Providers>
+      <Document>
+        <Outlet />
+        <ScrollRestoration />
+      </Document>
+    </Providers>
   );
 }
 

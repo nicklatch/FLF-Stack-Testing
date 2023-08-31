@@ -1,6 +1,6 @@
 import type { User } from '@prisma/client';
 import { createCookieSessionStorage, redirect } from '@remix-run/node';
-import { db } from 'utils/db.server';
+import { db } from '~/models/db.server';
 import bcrypt from 'bcryptjs';
 
 type LoginForm = {

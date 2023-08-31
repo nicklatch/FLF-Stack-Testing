@@ -1,3 +1,7 @@
 export default function OverviewRoute() {
-  return <div>Overview</div>;
+  return (
+    <div>
+      <h2 className='route-page__headings'>Overview</h2>
+    </div>
+  );
 }
