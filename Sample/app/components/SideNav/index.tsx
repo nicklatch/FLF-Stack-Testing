@@ -2,13 +2,6 @@ import { Link } from '@remix-run/react';
 import { buttonVariants } from '../ui/button';
 import { Separator } from '~/components/ui/separator';
 
-/**
- * Lineup Creation - lineup-creation
- * Results Entry - results-entry
- * Payouts - payouts
- * Track Conditions - track-conditions
- */
-
 const pages = [
   { name: 'Overview', path: 'overview' },
   { name: 'Registration', path: 'registration' },
