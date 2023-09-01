@@ -19,6 +19,7 @@ model User {
   userEmail      String
   userPhone      String?
   isAdmin        Boolean  @default(false)
+  defaultTheme   String   @default("dark")
   driversCreated Driver[]
 }
 
