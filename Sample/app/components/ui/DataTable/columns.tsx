@@ -1,7 +1,6 @@
 import type { ColumnDef } from '@tanstack/react-table';
 import type { Driver } from '@prisma/client';
 import { MoreHorizontal } from 'lucide-react';
-
 import { Button } from '~/components/ui/button';
 import {
   DropdownMenu,
@@ -12,32 +11,32 @@ import {
   DropdownMenuTrigger,
 } from '~/components/ui/dropdown-menu';
 import { Link } from '@remix-run/react';
-
+import { ColumnHeading } from './column-heading';
 
 export const columns: Array<ColumnDef<Driver>> = [
   {
     accessorKey: 'firstName',
-    header: () => <div className="font-bold text-left">First Name</div>,
+    header: () => <ColumnHeading headingText="First Name" />,
   },
   {
     accessorKey: 'lastName',
-    header: () => <div className="font-bold text-left">First Name</div>,
+    header: () => <ColumnHeading headingText="Last Name" />,
   },
   {
     accessorKey: 'carNumber',
-    header: () => <div className="font-bold text-left">Car Number</div>,
+    header: () => <ColumnHeading headingText="Car Number" />,
   },
   {
     accessorKey: 'baseClass',
-    header: () => <div className="font-bold text-left">Base Class</div>,
+    header: () => <ColumnHeading headingText="Base Class" />,
   },
   {
     accessorKey: 'driverPhone',
-    header: () => <div className="font-bold text-left">Driver Phone</div>,
+    header: () => <ColumnHeading headingText="Driver Phone" />,
   },
   {
     accessorKey: 'driverEmail',
-    header: () => <div className="font-bold text-left">Driver Email</div>,
+    header: () => <ColumnHeading headingText="Driver Email" />,
   },
   {
     id: 'actions',
