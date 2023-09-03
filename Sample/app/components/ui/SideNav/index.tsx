@@ -26,8 +26,9 @@ const SideNav = ({ displayProp }: SideNavProps) => {
   }, [location]);
 
   const isFocused = (path: string) => {
+    // TODO: change to '.includes()' from useLocation string
     return focused === `/fusion/${path}`
-      ? 'bg-background translate-x-[1.1rem] border border-r-0 rounded-r-none'
+      ? 'bg-background translate-x-[1.1rem] border border-r-0 border-l-primary border-l-8 rounded-r-none'
       : '';
   };
 
@@ -43,11 +44,11 @@ const SideNav = ({ displayProp }: SideNavProps) => {
           <li
             key={page.path}
             className={cn(
-              'flex justify-center items-center w-full h-14 px-2 border border-input rounded-md hover:bg-accent hover:text-accent-foreground ease-in-out duration-300 ',
+              'flex justify-center items-center w-full h-14 px-2 border border-input rounded-md hover:bg-primary hover:text-accent-foreground ease-in-out duration-300 ',
               isFocused(page.path)
             )}
           >
-            <Link to={`/fusion/${page.path}`} className=''>
+            <Link to={`/fusion/${page.path}`} className="">
               {page.name}
             </Link>
           </li>
