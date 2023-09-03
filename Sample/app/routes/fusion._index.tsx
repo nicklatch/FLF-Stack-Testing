@@ -1,5 +1,4 @@
-import { useRouteError, isRouteErrorResponse } from "@remix-run/react";
-import { Link } from "lucide-react";
+import { useRouteError, isRouteErrorResponse, Link } from '@remix-run/react';
 
 export default function FusionIndexRoute() {
   return (
@@ -16,8 +15,8 @@ export function ErrorBoundary() {
   if (isRouteErrorResponse(error) && error.status === 404) {
     return (
       <div className="error-container">
-        <p>Theres nothing here!.</p>
-        <Link to="new">Return to </Link>
+        <p>Theres nothing here!</p>
+        <Link to="/fusion">Back to the pits</Link>
       </div>
     );
   }

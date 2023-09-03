@@ -2,8 +2,8 @@ import {
   flexRender,
   getCoreRowModel,
   useReactTable,
-} from "@tanstack/react-table";
-import type { ColumnDef } from "@tanstack/react-table";
+} from '@tanstack/react-table';
+import type { ColumnDef } from '@tanstack/react-table';
 import {
   Table,
   TableBody,
@@ -11,7 +11,7 @@ import {
   TableHead,
   TableHeader,
   TableRow,
-} from "~/components/ui/table";
+} from '~/components/ui/table';
 
 // TODO: Fix table view on mobile
 
@@ -20,7 +20,7 @@ export interface DataTableProps<TData, TValue> {
   data: Array<TData>;
 }
 
-export default function DataTable<TData, TValue>({
+export function DataTable<TData, TValue>({
   columns,
   data,
 }: DataTableProps<TData, TValue>) {
@@ -33,7 +33,7 @@ export default function DataTable<TData, TValue>({
   return (
     <div className="rounded border-l border-t">
       <Table className="h-fit w-full">
-        <TableHeader>
+        <TableHeader className="bg-card">
           {table.getHeaderGroups().map((headerGroup) => (
             <TableRow key={headerGroup.id}>
               {headerGroup.headers.map((header) => {
@@ -43,7 +43,7 @@ export default function DataTable<TData, TValue>({
                       ? null
                       : flexRender(
                           header.column.columnDef.header,
-                          header.getContext(),
+                          header.getContext()
                         )}
                   </TableHead>
                 );
@@ -56,7 +56,7 @@ export default function DataTable<TData, TValue>({
             table.getRowModel().rows.map((row) => (
               <TableRow
                 key={row.id}
-                data-state={row.getIsSelected() && "selected"}
+                data-state={row.getIsSelected() && 'selected'}
               >
                 {row.getVisibleCells().map((cell) => (
                   <TableCell key={cell.id}>

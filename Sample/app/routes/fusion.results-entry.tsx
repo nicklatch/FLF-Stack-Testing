@@ -1,10 +1,43 @@
-import { useLoaderData } from "@remix-run/react";
+import { isRouteErrorResponse, useRouteError } from '@remix-run/react';
 
 export default function ResultsEntryRoute() {
-  const loaderData = useLoaderData<typeof loader>()
   return (
     <div>
-      <h2 className='route-page__headings'>Results Entry</h2>
+      <h2 className="route-page__headings">Results Entry</h2>
     </div>
+  );
+}
+
+export function ErrorBoundary() {
+  const error = useRouteError();
+  console.error(error);
+
+  if (isRouteErrorResponse(error)) {
+    if (error.status === 400) {
+      return (
+        <div className="error-container">
+          What you're trying to do is not allowed.
+        </div>
+      );
+    }
+    if (error.status === 401) {
+      return (
+        <div className="error-container">
+          Sorry, but you're unauthorized. Please contact your administrator for
+          assistance.
+        </div>
+      );
+    }
+    if (error.status === 404) {
+      return (
+        <div className="error-container">
+          Uh Oh..We seem to be having some technical difficulties
+        </div>
+      );
+    }
+  }
+
+  return (
+    <div className="error-container">There was an error while loading.</div>
   );
 }
