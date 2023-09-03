@@ -1,19 +1,19 @@
-import type { V2_MetaFunction, LoaderArgs } from "@remix-run/node";
-import { redirect } from "@remix-run/node";
-import { verifyUser } from "~/models/user.server";
-import { Link } from "@remix-run/react";
+import type { V2_MetaFunction, LoaderArgs } from '@remix-run/node';
+import { redirect } from '@remix-run/node';
+import { getUser } from '~/models/user.server';
+import { Link } from '@remix-run/react';
 
 export const meta: V2_MetaFunction = () => {
-  return [{ title: "Remix Testing" }];
+  return [{ title: 'Remix Testing' }];
 };
 
 export const loader = async ({ request }: LoaderArgs) => {
-  const isLoggedInAndValid = await verifyUser(request);
+  const isLoggedInAndValid = await getUser(request);
   if (!isLoggedInAndValid) {
-    throw Error("error");
+    throw Error('error');
   }
 
-  throw redirect("/fusion");
+  throw redirect('/fusion');
 };
 
 export default function Index() {
