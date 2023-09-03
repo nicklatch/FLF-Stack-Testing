@@ -1,7 +1,8 @@
-import type { LinksFunction, V2_MetaFunction } from "@remix-run/node";
-import type { PropsWithChildren } from "react";
+import type { LinksFunction, V2_MetaFunction } from '@remix-run/node';
+import type { PropsWithChildren } from 'react';
 import {
   Links,
+  Link,
   isRouteErrorResponse,
   LiveReload,
   Meta,
@@ -9,35 +10,36 @@ import {
   Outlet,
   Scripts,
   ScrollRestoration,
-} from "@remix-run/react";
-import { cssBundleHref } from "@remix-run/css-bundle";
-import styles from "./tailwind.css";
-import Providers from "./components/providers";
-import { useAtomValue } from "jotai";
-import { atomWithStorage } from "jotai/utils";
+} from '@remix-run/react';
+import { cssBundleHref } from '@remix-run/css-bundle';
+import styles from './tailwind.css';
+import Providers from './components/providers';
+import { useAtomValue } from 'jotai';
+import { atomWithStorage } from 'jotai/utils';
 
 export const links: LinksFunction = () => [
-  { rel: "preconnect", href: "https://fonts.googleapis.com" },
+  { rel: 'preconnect', href: 'https://fonts.googleapis.com' },
   {
-    rel: "preconnect",
-    href: "https://fonts.gstatic.com",
-    crossOrigin: "anonymous",
+    rel: 'preconnect',
+    href: 'https://fonts.gstatic.com',
+    crossOrigin: 'anonymous',
   },
   {
-    href: "https://fonts.googleapis.com/css2?family=Inter:wght@400;500;700&display=swap",
-    rel: "stylesheet",
+    href:
+      'https://fonts.googleapis.com/css2?family=Inter:wght@400;500;700&display=swap',
+    rel: 'stylesheet',
   },
-  { rel: "stylesheet", href: styles },
-  ...(cssBundleHref ? [{ rel: "stylesheet", href: cssBundleHref }] : []),
+  { rel: 'stylesheet', href: styles },
+  ...(cssBundleHref ? [{ rel: 'stylesheet', href: cssBundleHref }] : []),
 ];
 
 export const meta: V2_MetaFunction = () => {
-  const description = "Race Managment, Simplified";
+  const description = 'Race Managment, Simplified';
 
   return [
-    { name: "description", content: description },
-    { name: "twitter:description", content: description },
-    { title: "FastLane Fusion" },
+    { name: 'description', content: description },
+    { name: 'twitter:description', content: description },
+    { title: 'FastLane Fusion' },
   ];
 };
 
@@ -45,11 +47,11 @@ export const meta: V2_MetaFunction = () => {
  * TODO: change to atomWithStorage - has related at 'header/index.html' route
  * ? should this be using a hydrated atom ?
  * */
-export const themeAtom = atomWithStorage("theme", "dark");
+export const themeAtom = atomWithStorage('theme', 'dark');
 
 function Document({
   children,
-  title = "FastLane Fusion",
+  title = 'FastLane Fusion',
 }: PropsWithChildren<{ title?: string }>) {
   const appTheme = useAtomValue(themeAtom);
 
@@ -99,11 +101,12 @@ export function ErrorBoundary() {
     );
   }
 
-  const errorMessage = error instanceof Error ? error.message : "Unknown error";
+  const errorMessage = error instanceof Error ? error.message : 'Unknown error';
   return (
     <Document title="Uh-oh!">
       <div className="error-container">
         <h1>App Error</h1>
+        <Link to="/">Return to the pits</Link>
         <pre>{errorMessage}</pre>
       </div>
     </Document>
