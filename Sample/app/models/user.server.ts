@@ -9,7 +9,6 @@ type LoginForm = {
 };
 
 const sessionSecret = process.env.SESSION_SECRET;
-
 if (!sessionSecret) {
   throw new Error('SESSION_SECRET is missing or invalid');
 }
@@ -29,7 +28,7 @@ export async function login({ username, password }: LoginForm) {
     return null;
   }
 
-  return { id: user.id, username, defaultTheme: user.defaultTheme };
+  return { id: user.id, username };
 }
 
 const {
@@ -50,15 +49,6 @@ const {
 
 function getUserSession(request: Request) {
   return getSession(request.headers.get('Cookie'));
-}
-
-export async function verifyUser(request: Request) {
-  const session = await getUserSession(request);
-  if (!session.has('userId')) {
-    throw await logout(request);
-  }
-
-  return getUser(request);
 }
 
 export async function getUserId(request: Request) {
@@ -86,9 +76,25 @@ export async function requireUserId(
   return userId;
 }
 
+export async function requireAdmin(request: Request) {
+  const userId = await getUserId(request);
+
+  if (typeof userId !== 'string') {
+    return null;
+  }
+
+  const isAdmin = await db.user.findUnique({
+    where: { id: userId },
+    select: {
+      isAdmin: true,
+    },
+  });
+
+  return isAdmin ? isAdmin : null;
+}
+
 export async function logout(request: Request) {
   const session = await getUserSession(request);
-
 
   return redirect('/login', {
     headers: { 'Set-Cookie': await destroySession(session) },
@@ -117,12 +123,6 @@ export async function getUser(request: Request) {
   }
 
   return user;
-}
-
-export type UserTheme = 'dark' | 'light'
-
-export async function updateUserTheme<UserTheme>(theme: UserTheme) {
-  console.log(theme)
 }
 
 export async function createUserSession(
