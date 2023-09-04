@@ -55,7 +55,7 @@ export const columns: Array<ColumnDef<Driver>> = [
             <DropdownMenuLabel>Actions</DropdownMenuLabel>
             <DropdownMenuSeparator />
             <DropdownMenuItem>
-              <Link to={`${driver.firstName}${driver.lastName}`}>
+              <Link to={`${driver.firstName}-${driver.lastName}-${driver.id}`}>
                 Edit Driver
               </Link>
             </DropdownMenuItem>
