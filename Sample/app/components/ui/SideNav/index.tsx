@@ -25,9 +25,9 @@ const SideNav = ({ displayProp }: SideNavProps) => {
     console.log(location);
   }, [location]);
 
-  const isFocused = (path: string) => {
+  const isFocused = (location: string) => {
     // TODO: change to '.includes()' from useLocation string
-    return focused === `/fusion/${path}`
+    return focused.includes(location)
       ? 'bg-background translate-x-[1.1rem] border border-r-0 border-l-primary border-l-8 rounded-r-none'
       : '';
   };
