@@ -10,3 +10,17 @@ export async function getAllDrivers(request: Request) {
 
   return user ? drivers : null;
 }
+
+export async function findDriver(driverId: string, request: Request) {
+  const user = await getUser(request);
+
+  if (!user) {
+    return null;
+  }
+
+  const driver = await db.driver.findUnique({
+    where: { id: driverId },
+  });
+
+  return driver;
+}
